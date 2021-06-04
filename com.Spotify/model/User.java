@@ -1,35 +1,63 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
+  private String userName;
+  private String nationality;
+  private List<Playlist> playlistCreated = new ArrayList<Playlist>();
 
-    private String name = new String();
-    private String nacionality = new String();
-    private int createdPlaylists;
+  protected User(String name, String nationality, List<Playlist> playlistCreated) {
+    setNameAndnationality(name, nationality);
+    setPlaylistCreated(playlistCreated);
+  }
 
-    protected String getName() {
-        return this.name;
-    }
+  protected User(String name, String nationality, Playlist... playlistCreated) {
+    setNameAndnationality(name, nationality);
+    for (Playlist playlist : playlistCreated)
+      this.playlistCreated.add(playlist);
 
-    protected void setName(String name) {
-        this.name = name;
-    }
+  }
 
-    protected String getNacionality() {
-        return this.nacionality;
-    }
+  private void setNameAndnationality(String name, String nationality) {
+    setNationality(nationality);
+    setUserName(userName);
+  }
 
-    protected void setNacionality(String nacionality) {
-        this.nacionality = nacionality;
-    }
+  protected List<Playlist> getPlaylistCreated() {
+    return playlistCreated;
+  }
 
-    protected int getCreatedPlaylists() {
-        return this.createdPlaylists;
-    }
+  protected String getNationality() {
+    return nationality;
+  }
 
-    protected void setCreatedPlaylists(int createdPlaylists) {
-        this.createdPlaylists = createdPlaylists;
-    }
+  protected void setNationality(String nationality) {
+    this.nationality = nationality;
+  }
 
+  protected String getUserName() {
+    return userName;
+  }
 
+  protected void setUserName(String userName) {
+    this.userName = userName;
+  }
+
+  protected void setPlaylistCreated(List<Playlist> playlistCreated) {
+    this.playlistCreated = playlistCreated;
+  }
+
+  @Override
+  public String toString() {
+    return "User name: " + getUserName() + "\n User Nationality: " + getNationality() + "\n Playlist created: "
+        + getPlaylistCreated().size();
+  }
+
+  @Override
+  protected Object clone() throws CloneNotSupportedException {
+    return new User(getUserName(), getNationality(), getPlaylistCreated());
+  }
 
 }

@@ -16,4 +16,10 @@ public class Podcast extends Track {
     this.description = description;
   }
 
+  @Override
+  public String toString() {
+    return super.toString() + "\n Description: " + getDescription();
+  }
+
+
 }
