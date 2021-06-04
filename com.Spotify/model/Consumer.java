@@ -5,19 +5,19 @@ public class Consumer extends User{
     private int followers;
     private int followed;
 
-    public int getFollowers() {
+    protected int getFollowers() {
         return this.followers;
     }
 
-    public void setFollowers(int followers) {
+    protected void setFollowers(int followers) {
         this.followers = followers;
     }
 
-    public int getFollowed() {
+    protected int getFollowed() {
         return this.followed;
     }
 
-    public void setFollowed(int followed) {
+    protected void setFollowed(int followed) {
         this.followed = followed;
     }
 
