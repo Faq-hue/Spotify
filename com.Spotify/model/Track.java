@@ -49,4 +49,9 @@ class Track {
   public String toString() {
     return "name: " + getName() + "\n gender: " + getGender() + "\n duration of song: " + getDuration();
   }
+
+  @Override
+  protected Object clone() throws CloneNotSupportedException {
+    return new Track(getName() ,getGender(), getDuration(), getPopularity());
+  }
 }
