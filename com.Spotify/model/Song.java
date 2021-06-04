@@ -5,14 +5,8 @@ public class Song extends Track {
     super(name, gender, duration, 0);
   }
 
- 
   @Override
   public String toString() {
     return super.toString();
-  }
-
-  @Override
-  protected Object clone() throws CloneNotSupportedException {
-    return new Song(getDuration(), getName(), getGender());
   }
 }
