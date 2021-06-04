@@ -1,43 +1,52 @@
 package model;
 
-public class Track {
-    
-    private String name = new String();
-    private int duration;
-    private int popularity;
-    private String gender = new String();
+class Track {
+  private String name;
+  private float duration;
+  private int popularity;
+  private String gender;
 
-    public String getName() {
-        return this.name;
-    }
+  protected Track(String name, String gender, float duration, int popularity) {
+    setDuration(duration);
+    setGender(gender);
+    setName(name);
+    setPopularity(popularity);
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  protected String getGender() {
+    return gender;
+  }
 
-    public int getDuration() {
-        return this.duration;
-    }
+  protected float getDuration() {
+    return duration;
+  }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
+  protected void setDuration(float duration) {
+    this.duration = duration;
+  }
 
-    public int getPopularity() {
-        return this.popularity;
-    }
+  protected String getName() {
+    return name;
+  }
 
-    public void setPopularity(int popularity) {
-        this.popularity = popularity;
-    }
+  protected void setName(String name) {
+    this.name = name;
+  }
 
-    public String getGender() {
-        return this.gender;
-    }
+  protected int getPopularity() {
+    return popularity;
+  }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+  protected void setPopularity(int popularity) {
+    this.popularity = popularity;
+  }
 
+  protected void setGender(String gender) {
+    this.gender = gender;
+  }
 
+  @Override
+  public String toString() {
+    return "name: " + getName() + "\n gender: " + getGender() + "\n duration of song: " + getDuration();
+  }
 }
