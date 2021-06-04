@@ -5,11 +5,10 @@ public class Song extends Track {
     super(name, gender, duration, 0);
   }
 
+ 
   @Override
   public String toString() {
-    return "name: " + getName() +
-          "\n gender: " + getGender() + 
-          "\n duration of song: " + getDuration();
+    return super.toString();
   }
 
   @Override
@@ -17,4 +16,3 @@ public class Song extends Track {
     return new Song(getDuration(), getName(), getGender());
   }
 }
-
