@@ -3,7 +3,7 @@ package config;
 public class JDBCUtil {
     
     private static final String user = "root";
-    private static final String password = "adminkele";
+    private static final String password = "ingrese contraseña";
     private static final String host = "localhost";
     private static final String database = "Spotify";
     private static final String port = "3306";
