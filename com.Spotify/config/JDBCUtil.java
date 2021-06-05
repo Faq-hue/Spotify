@@ -3,9 +3,9 @@ package config;
 public class JDBCUtil {
     
     private static final String user = "root";
-    private static final String password = "Ingrese su contraseña";
+    private static final String password = "adminkele";
     private static final String host = "localhost";
-    private static final String database = "spotify";
+    private static final String database = "Spotify";
     private static final String port = "3306";
 
     public static String getURL(){

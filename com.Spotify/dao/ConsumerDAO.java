@@ -12,7 +12,7 @@ public class ConsumerDAO {
     
     public Consumer add ( Consumer consumer ){
 
-        String INSERT_CONSUMER_SQL = "INSERT INTO spotify.consumidor (seguidores, seguidos, Usuario_idUsuario)" + "VALUES (?,?,?);";
+        String INSERT_CONSUMER_SQL = "INSERT INTO Spotify.Consumidor (seguidores, seguidos, Usuario_idUsuario)" + "VALUES (?,?,?);";
 
         
 
@@ -23,7 +23,7 @@ public class ConsumerDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CONSUMER_SQL);            
             preparedStatement.setInt(1, consumer.getFollowers());
             preparedStatement.setInt(2, consumer.getFollowed());
-            preparedStatement.setInt(3, 121);
+            preparedStatement.setInt(3, 150);
 
             System.out.println(preparedStatement);
 

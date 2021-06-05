@@ -4,6 +4,12 @@ public class Creator extends User{
     
     private int createdTracks;
 
+    public Creator(String name, String nationality){
+
+        super(name, nationality);
+        
+    }
+
     public int getCreatedTracks() {
         return this.createdTracks;
     }

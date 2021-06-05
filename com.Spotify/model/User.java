@@ -9,18 +9,18 @@ public class User {
   private List<Playlist> playlistCreated = new ArrayList<Playlist>();
 
   protected User(String name, String nationality, List<Playlist> playlistCreated) {
-    setNameAndnationality(name, nationality);
+    this(name, nationality);
     setPlaylistCreated(playlistCreated);
   }
 
   protected User(String name, String nationality, Playlist... playlistCreated) {
-    setNameAndnationality(name, nationality);
+    this(name, nationality);
     for (Playlist playlist : playlistCreated)
       this.playlistCreated.add(playlist);
 
   }
 
-  private void setNameAndnationality(String name, String nationality) {
+  protected User (String name, String nationality) {
     setNationality(nationality);
     setUserName(userName);
   }

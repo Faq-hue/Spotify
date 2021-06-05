@@ -5,19 +5,25 @@ public class Consumer extends User{
     private int followers;
     private int followed;
 
-    protected int getFollowers() {
+    public Consumer(String name, String nationality){
+
+        super(name, nationality);
+
+    }
+
+    public int getFollowers() {
         return this.followers;
     }
 
-    protected void setFollowers(int followers) {
+    public void setFollowers(int followers) {
         this.followers = followers;
     }
 
-    protected int getFollowed() {
+    public int getFollowed() {
         return this.followed;
     }
 
-    protected void setFollowed(int followed) {
+    public void setFollowed(int followed) {
         this.followed = followed;
     }
 
