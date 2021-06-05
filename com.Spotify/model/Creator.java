@@ -1,22 +1,21 @@
 package model;
 
-public class Creator extends User{
-    
-    private int createdTracks;
+public class Creator extends User {
 
-    public Creator(String name, String nationality){
+  private int createdTracks;
 
-        super(name, nationality);
-        
-    }
+  public Creator(String name, String nationality) {
 
-    public int getCreatedTracks() {
-        return this.createdTracks;
-    }
+    super(name, nationality);
 
-    public void setCreatedTracks(int createdTracks) {
-        this.createdTracks = createdTracks;
-    }
+  }
 
+  public int getCreatedTracks() {
+    return this.createdTracks;
+  }
+
+  public void setCreatedTracks(int createdTracks) {
+    this.createdTracks = createdTracks;
+  }
 
 }

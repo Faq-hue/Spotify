@@ -1,30 +1,30 @@
 package model;
 
-public class Consumer extends User{
-    
-    private int followers;
-    private int followed;
+public class Consumer extends User {
 
-    public Consumer(String name, String nationality){
+  private int followers;
+  private int followed;
 
-        super(name, nationality);
+  public Consumer(String name, String nationality) {
 
-    }
+    super(name, nationality);
 
-    public int getFollowers() {
-        return this.followers;
-    }
+  }
 
-    public void setFollowers(int followers) {
-        this.followers = followers;
-    }
+  public int getFollowers() {
+    return this.followers;
+  }
 
-    public int getFollowed() {
-        return this.followed;
-    }
+  public void setFollowers(int followers) {
+    this.followers = followers;
+  }
 
-    public void setFollowed(int followed) {
-        this.followed = followed;
-    }
+  public int getFollowed() {
+    return this.followed;
+  }
+
+  public void setFollowed(int followed) {
+    this.followed = followed;
+  }
 
 }

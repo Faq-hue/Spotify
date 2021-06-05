@@ -52,6 +52,6 @@ class Track {
 
   @Override
   protected Object clone() throws CloneNotSupportedException {
-    return new Track(getName() ,getGender(), getDuration(), getPopularity());
+    return new Track(getName(), getGender(), getDuration(), getPopularity());
   }
 }

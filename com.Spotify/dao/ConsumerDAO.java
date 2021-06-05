@@ -6,41 +6,42 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.mysql.cj.xdevapi.Statement;
-
 import config.JDBCUtil;
 import model.Consumer;
 
 public class ConsumerDAO {
-    
-    public Consumer add ( Consumer consumer ){
 
-        String INSERT_CONSUMER_SQL = "INSERT INTO Spotify.Consumidor (seguidores, seguidos, Usuario_idUsuario)" + "VALUES (?,?,?);";
+  public Consumer add(Consumer consumer) {
 
-        try(Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(), JDBCUtil.getPassword());
+    String INSERT_CONSUMER_SQL = "INSERT INTO Spotify.Consumidor (seguidores, seguidos, Usuario_idUsuario)"
+        + "VALUES (?,?,?);";
 
-        PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CONSUMER_SQL,java.sql.Statement.RETURN_GENERATED_KEYS);){
-            
-            
-            preparedStatement.setInt(1, consumer.getFollowers());
-            preparedStatement.setInt(2, consumer.getFollowed());
-            preparedStatement.setInt(3, 150);
+    try (
+        Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
+            JDBCUtil.getPassword());
 
-            System.out.println(preparedStatement);
+        PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CONSUMER_SQL,
+            java.sql.Statement.RETURN_GENERATED_KEYS);) {
 
-            preparedStatement.executeUpdate();
+      preparedStatement.setInt(1, consumer.getFollowers());
+      preparedStatement.setInt(2, consumer.getFollowed());
+      preparedStatement.setInt(3, 150);
 
-            ResultSet rs = preparedStatement.getGeneratedKeys();
+      System.out.println(preparedStatement);
 
-            if(rs.next()){
-               consumer.setId(rs.getInt(1));
-            }
+      preparedStatement.executeUpdate();
 
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
+      ResultSet rs = preparedStatement.getGeneratedKeys();
 
-        return consumer;
+      if (rs.next()) {
+        consumer.setId(rs.getInt(1));
+      }
+
+    } catch (SQLException e) {
+      System.out.println(e);
     }
+
+    return consumer;
+  }
 
 }

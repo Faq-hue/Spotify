@@ -14,31 +14,16 @@ public class User {
     setPlaylistCreated(playlistCreated);
   }
 
-  protected int getId() {
-    return id;
-  }
-
-  protected void setId(int id) {
-    this.id = id;
-  }
-
-  protected User(String name, String nationality, Playlist... playlistCreated) {
-    this(name, nationality);
-    for (Playlist playlist : playlistCreated)
-      this.playlistCreated.add(playlist);
-
-  }
-  
-  protected User (String name, String nationality) {
+  protected User(String name, String nationality) {
     setNationality(nationality);
     setUserName(userName);
   }
 
-  protected List<Playlist> getPlaylistCreated() {
+  public List<Playlist> getPlaylistCreated() {
     return playlistCreated;
   }
 
-  protected String getNationality() {
+  public String getNationality() {
     return nationality;
   }
 
@@ -46,15 +31,23 @@ public class User {
     this.nationality = nationality;
   }
 
-  protected String getUserName() {
+  public String getUserName() {
     return userName;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   protected void setUserName(String userName) {
     this.userName = userName;
   }
 
-  protected void setPlaylistCreated(List<Playlist> playlistCreated) {
+  public void setPlaylistCreated(List<Playlist> playlistCreated) {
     this.playlistCreated = playlistCreated;
   }
 
@@ -65,7 +58,7 @@ public class User {
   }
 
   @Override
-  protected Object clone() throws CloneNotSupportedException {
+  public Object clone() throws CloneNotSupportedException {
     return new User(getUserName(), getNationality(), getPlaylistCreated());
   }
 
