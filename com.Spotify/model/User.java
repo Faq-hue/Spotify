@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+  private int id;
   private String userName;
   private String nationality;
   private List<Playlist> playlistCreated = new ArrayList<Playlist>();
@@ -13,13 +14,21 @@ public class User {
     setPlaylistCreated(playlistCreated);
   }
 
+  protected int getId() {
+    return id;
+  }
+
+  protected void setId(int id) {
+    this.id = id;
+  }
+
   protected User(String name, String nationality, Playlist... playlistCreated) {
     this(name, nationality);
     for (Playlist playlist : playlistCreated)
       this.playlistCreated.add(playlist);
 
   }
-
+  
   protected User (String name, String nationality) {
     setNationality(nationality);
     setUserName(userName);

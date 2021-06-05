@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import com.mysql.cj.xdevapi.Statement;
+
 import config.JDBCUtil;
 import model.Consumer;
 
@@ -16,11 +19,11 @@ public class ConsumerDAO {
 
         
 
-        try {
-            
-            Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(), JDBCUtil.getPassword());
+        try(Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(), JDBCUtil.getPassword());
 
-            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CONSUMER_SQL);            
+        PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CONSUMER_SQL,java.sql.Statement.RETURN_GENERATED_KEYS);){
+            
+            
             preparedStatement.setInt(1, consumer.getFollowers());
             preparedStatement.setInt(2, consumer.getFollowed());
             preparedStatement.setInt(3, 150);
@@ -29,11 +32,11 @@ public class ConsumerDAO {
 
             preparedStatement.executeUpdate();
 
-            //ResultSet rs = preparedStatement.getGeneratedKeys();
+            ResultSet rs = preparedStatement.getGeneratedKeys();
 
-            //if(rs.next()){
-              //  consumer.setId(rs.getInt(1));
-            //}
+            if(rs.next()){
+               consumer.setId(rs.getInt(1));
+            }
 
         } catch (SQLException e) {
             System.out.println(e);

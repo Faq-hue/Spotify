@@ -5,9 +5,44 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import config.JDBCUtil;
+import java.sql.Statement;
+import java.util.function.Consumer;
 
+import config.JDBCUtil;
+import model.User;
 
 public class UserDAO {
+    
+    public User add (Consumer user){
+
+    String INSERT_USER_SQL = "INSERT INTO Spotify.Usuario (IdUsuario, nombre , nacionalidad , playlist_creadas)" + "VALUES(?,?,?)";
+
+        try(Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(), JDBCUtil.getPassword());
+
+        PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER_SQL , Statement.RETURN_GENERATED_KEYS);){
+
+            
+            preparedStatement.setString(2, user.getUserName());
+            preparedStatement.setString(3, user.getNationality());
+            preparedStatement.setInt(4, user.getPlaylistCreated().size());
+
+            System.out.println(preparedStatement);
+
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+
+            if(rs.next()){
+
+                user.setId(rs.getInt(1));
+
+            }
+
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+
+    return user;
+
+    }
+
     
 }
