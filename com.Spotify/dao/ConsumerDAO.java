@@ -17,8 +17,6 @@ public class ConsumerDAO {
 
         String INSERT_CONSUMER_SQL = "INSERT INTO Spotify.Consumidor (seguidores, seguidos, Usuario_idUsuario)" + "VALUES (?,?,?);";
 
-        
-
         try(Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(), JDBCUtil.getPassword());
 
         PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CONSUMER_SQL,java.sql.Statement.RETURN_GENERATED_KEYS);){
