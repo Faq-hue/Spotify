@@ -1,6 +1,6 @@
 package model;
 
-class Track {
+public class Track {
   private String name;
   private float duration;
   private int popularity;
