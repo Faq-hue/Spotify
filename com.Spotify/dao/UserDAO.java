@@ -1,4 +1,4 @@
-package dao;
+package dao.dao_user;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,8 +13,8 @@ import model.User;
 
 public class UserDAO implements IUserDao {
 
-  private String INSERT_USER_SQL = "INSERT INTO spotify.usuario (nombre_usuario , playlists_creadas , nacionalidad)"
-      + "VALUES(?,?,?)";
+  private String INSERT_USER_SQL = "INSERT INTO spotify.usuario (id_usuario,nombre_usuario , playlists_creadas , nacionalidad)"
+      + "VALUES(?,?,?,?)";
 
   private String SELECT_ONE_USER_SQL = "SELECT * FROM usuario " + "WHERE id_usuario=?;";
 
@@ -32,9 +32,10 @@ public class UserDAO implements IUserDao {
         PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER_SQL,
             Statement.RETURN_GENERATED_KEYS);) {
 
-      preparedStatement.setString(1, user.getUserName());
-      preparedStatement.setInt(2, user.getPlaylistCreated().size());
-      preparedStatement.setString(3, user.getNationality());
+      preparedStatement.setString(1, user.getId());        
+      preparedStatement.setString(2, user.getUserName());
+      preparedStatement.setInt(3, user.getPlaylistCreated().size());
+      preparedStatement.setString(4, user.getNationality());
 
       System.out.println(preparedStatement);
 
@@ -48,13 +49,13 @@ public class UserDAO implements IUserDao {
   }
 
   @Override
-  public User get(int id) {
+  public User get(String id) {
     try (
         Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
             JDBCUtil.getPassword());
         PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ONE_USER_SQL);) {
 
-      preparedStatement.setInt(1, id);
+      preparedStatement.setString(1, id);
 
       ResultSet rs = preparedStatement.executeQuery();
       while (rs.next()) {
@@ -71,14 +72,14 @@ public class UserDAO implements IUserDao {
   }
 
   @Override
-  public User delete(int id) {
+  public User delete(String id) {
     User u = get(id);
     try (
         Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
             JDBCUtil.getPassword());
         PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ONE_USER_SQL);) {
 
-      preparedStatement.setInt(1, id);
+      preparedStatement.setString(1, id);
 
       preparedStatement.executeUpdate();
 
@@ -89,7 +90,7 @@ public class UserDAO implements IUserDao {
   }
 
   @Override
-  public User update(int id,User userUpdated) {
+  public User update(String id,User userUpdated) {
     try (
         Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
             JDBCUtil.getPassword());
@@ -98,7 +99,7 @@ public class UserDAO implements IUserDao {
       preparedStatement.setString(1, userUpdated.getUserName());
       preparedStatement.setInt(2, userUpdated.getPlaylistCreated().size());
       preparedStatement.setString(3, userUpdated.getNationality());
-      preparedStatement.setInt(4,id);
+      preparedStatement.setString(4,id);
 
       preparedStatement.executeUpdate();
 
