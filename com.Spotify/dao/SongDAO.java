@@ -6,39 +6,35 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import config.JDBCUtil;
+import dao.dao_interfaces.ISongDAO;
 import model.Song;
 
+public class SongDAO implements ISongDAO {
 
+  private String INSERT_SONG_SQL = "INSERT INTO cancion (nombre, duracion, popularidad, genero)" + "VALUES(?,?,?,?)";
 
-public class SongDAO {
-    
-    public void add(Song song) {
+  @Override
+  public Song add(Song arg) {
 
-        String INSERT_USER_SQL = "INSERT INTO Spotify.Cancion (Pista_idPista)"
-             + "VALUES(?)";
-     
-         try (
-             Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
-                 JDBCUtil.getPassword());
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER_SQL,
-                 Statement.RETURN_GENERATED_KEYS);) {
-     
- 
-           
-           System.out.println(preparedStatement);
-     
-           ResultSet rs = preparedStatement.getGeneratedKeys();
-     
-           if (rs.next()) {
-     
-             //song.setId(rs.getInt(2));
-           }
-     
-         } catch (SQLException e) {
-           System.out.println(e);
-         }
-         
-       }
+    return null;
+  }
+
+  @Override
+  public Song get(int arg) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Song delete(int arg) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Song update(int arg1, Song arg2) {
+    // TODO Auto-generated method stub
+    return null;
+  }
 }
