@@ -1,47 +1,67 @@
 package model;
 
+import java.util.UUID;
+
 public class Track {
+  private String id = UUID.randomUUID().toString();
   private String name;
   private float duration;
   private int popularity;
   private String gender;
+  private String idUser;
 
-  protected Track(String name, String gender, float duration, int popularity) {
+  public String getId() {
+    return this.id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getIdUser() {
+    return this.idUser;
+  }
+
+  public void setIdUser(String idUser) {
+    this.idUser = idUser;
+  }
+
+  public Track(String name, String gender, float duration, int popularity) {
     setDuration(duration);
     setGender(gender);
     setName(name);
     setPopularity(popularity);
   }
 
-  protected String getGender() {
+  public String getGender() {
     return gender;
   }
 
-  protected float getDuration() {
+  public float getDuration() {
     return duration;
   }
 
-  protected void setDuration(float duration) {
+  public void setDuration(float duration) {
     this.duration = duration;
   }
 
-  protected String getName() {
+  public String getName() {
     return name;
   }
 
-  protected void setName(String name) {
+  public void setName(String name) {
     this.name = name;
   }
 
-  protected int getPopularity() {
+  public int getPopularity() {
     return popularity;
   }
 
-  protected void setPopularity(int popularity) {
+  public void setPopularity(int popularity) {
     this.popularity = popularity;
   }
 
-  protected void setGender(String gender) {
+  public void setGender(String gender) {
     this.gender = gender;
   }
 
