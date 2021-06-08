@@ -16,7 +16,7 @@ public class User {
 
   protected User(String name, String nationality) {
     setNationality(nationality);
-    setUserName(userName);
+    setUserName(name);
   }
 
   public List<Playlist> getPlaylistCreated() {
