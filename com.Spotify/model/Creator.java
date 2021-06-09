@@ -1,21 +1,31 @@
 package model;
 
-public class Creator extends User {
+public class Consumer extends User {
 
-  private int createdTracks;
+  private int followers = 0;
+  private int followed = 0;
 
-  public Creator(String name, String nationality) {
-
+  public Consumer(String name, String nationality) {
     super(name, nationality);
-
   }
 
-  public int getCreatedTracks() {
-    return this.createdTracks;
+  public int getFollowers() {
+    return this.followers;
   }
 
-  public void setCreatedTracks(int createdTracks) {
-    this.createdTracks = createdTracks;
+  public void setFollowers(int followers) {
+    this.followers = followers;
   }
 
+  public int getFollowed() {
+    return this.followed;
+  }
+
+  public void setFollowed(int followed) {
+    this.followed = followed;
+  }
+
+
+
+  
 }
