@@ -2,19 +2,28 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class User {
-  private int id;
   private String userName;
   private String nationality;
   private List<Playlist> playlistCreated = new ArrayList<Playlist>();
+  private String id = UUID.randomUUID().toString();
 
-  protected User(String name, String nationality, List<Playlist> playlistCreated) {
+  public User(String name, String nationality, List<Playlist> playlistCreated) {
     this(name, nationality);
     setPlaylistCreated(playlistCreated);
   }
 
-  protected User(String name, String nationality) {
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public User(String name, String nationality) {
     setNationality(nationality);
     setUserName(name);
   }
@@ -27,7 +36,7 @@ public class User {
     return nationality;
   }
 
-  protected void setNationality(String nationality) {
+  public void setNationality(String nationality) {
     this.nationality = nationality;
   }
 
@@ -35,15 +44,7 @@ public class User {
     return userName;
   }
 
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  protected void setUserName(String userName) {
+  public void setUserName(String userName) {
     this.userName = userName;
   }
 
