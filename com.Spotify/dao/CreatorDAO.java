@@ -6,11 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import dao.dao_interfaces.ICreatorDAO;
 import java.util.ArrayList;
 import java.util.List;
-
 import config.JDBCUtil;
-import dao.dao_interfaces.ICreatorDAO;
 import model.Creator;
 
 public class CreatorDAO implements ICreatorDAO {

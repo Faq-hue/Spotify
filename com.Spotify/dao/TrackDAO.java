@@ -36,6 +36,8 @@ public class TrackDAO implements ITrackDAO {
 
       System.out.println(preparedStatement);
 
+      preparedStatement.executeUpdate();
+
     } catch (SQLException e) {
       System.out.println(e);
     }
@@ -44,7 +46,7 @@ public class TrackDAO implements ITrackDAO {
   }
 
   @Override
-  public Track get(int id) {
+  public Track get(String id) {
 
     try (
         Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
@@ -54,6 +56,8 @@ public class TrackDAO implements ITrackDAO {
 
       System.out.println(preparedStatement);
 
+      preparedStatement.executeQuery();
+
     } catch (SQLException e) {
       System.out.println(e);
     }
@@ -62,7 +66,7 @@ public class TrackDAO implements ITrackDAO {
   }
 
   @Override
-  public Track delete(int id) {
+  public Track delete(String id) {
 
     Track t = get(id);
 
@@ -72,9 +76,11 @@ public class TrackDAO implements ITrackDAO {
         PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ONE_TRACK_SQL,
             Statement.RETURN_GENERATED_KEYS);) {
       
-        preparedStatement.setInt(1, id);
+        preparedStatement.setString(1, id);
 
       System.out.println(preparedStatement);
+
+      preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
       System.out.println(e);
@@ -84,7 +90,7 @@ public class TrackDAO implements ITrackDAO {
   }
 
   @Override
-  public Track update(int id, Track trackUpdated) {
+  public Track update(String id, Track trackUpdated) {
     
     try (
         Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
@@ -94,7 +100,7 @@ public class TrackDAO implements ITrackDAO {
       preparedStatement.setString(1,trackUpdated.getName());
       preparedStatement.setFloat(2, trackUpdated.getDuration());
       preparedStatement.setInt(3, trackUpdated.getPopularity());
-      preparedStatement.setInt(4, id);
+      preparedStatement.setString(4, id);
 
       preparedStatement.executeUpdate();
 

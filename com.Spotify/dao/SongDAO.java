@@ -15,25 +15,25 @@ public class SongDAO implements ISongDAO {
   private String INSERT_SONG_SQL = "INSERT INTO cancion (nombre, duracion, popularidad, genero)" + "VALUES(?,?,?,?)";
 
   @Override
-  public Song add(Song arg) {
+  public Song add(Song song) {
 
     return null;
   }
 
   @Override
-  public Song get(int arg) {
+  public Song get(String id) {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public Song delete(int arg) {
+  public Song delete(String id) {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public Song update(int arg1, Song arg2) {
+  public Song update(String id, Song song) {
     // TODO Auto-generated method stub
     return null;
   }

@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import config.JDBCUtil;
 import dao.dao_interfaces.IUserDao;
 import model.User;
@@ -63,6 +62,7 @@ public class UserDAO implements IUserDao {
       }
 
       rs.close();
+      
 
     } catch (Exception e) {
       System.out.println(e);

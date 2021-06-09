@@ -5,22 +5,14 @@ import java.util.List;
 import java.util.UUID;
 
 public class User {
+  private String id = UUID.randomUUID().toString();
   private String userName;
   private String nationality;
   private List<Playlist> playlistCreated = new ArrayList<Playlist>();
-  private String id = UUID.randomUUID().toString();
 
-  public User(String name, String nationality, List<Playlist> playlistCreated) {
+  protected User(String name, String nationality, List<Playlist> playlistCreated) {
     this(name, nationality);
     setPlaylistCreated(playlistCreated);
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
   }
 
   public User(String name, String nationality) {
@@ -36,7 +28,7 @@ public class User {
     return nationality;
   }
 
-  public void setNationality(String nationality) {
+  protected void setNationality(String nationality) {
     this.nationality = nationality;
   }
 
@@ -44,7 +36,15 @@ public class User {
     return userName;
   }
 
-  public void setUserName(String userName) {
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  protected void setUserName(String userName) {
     this.userName = userName;
   }
 
