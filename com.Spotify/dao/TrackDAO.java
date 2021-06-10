@@ -3,8 +3,11 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import config.JDBCUtil;
 import dao.dao_interfaces.ITrackDAO;
 import model.Track;
@@ -19,6 +22,10 @@ public class TrackDAO implements ITrackDAO {
 
   private String UPDATE_ONE_TRACK_SQL = "UPDATE pista "
       + "Set nombre = ?, duracion=?, popularidad=? where id_pista = ?;";
+
+  private String SELECT_TRACK_SQL = "SELECT * FROM pista";
+  
+  private TrackDAO tr = new TrackDAO();
 
   @Override
   public Track add(Track track) {
@@ -108,6 +115,31 @@ public class TrackDAO implements ITrackDAO {
       System.out.println(e);
     }
     return trackUpdated;
+  }
+
+  @Override
+  public List<Track> getlist() {
+    
+    List<Track> trackList = new ArrayList<Track>();
+
+    try (
+        Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
+            JDBCUtil.getPassword());
+        PreparedStatement preparedStatement = connection.prepareStatement(SELECT_TRACK_SQL);) {
+
+      ResultSet rs = preparedStatement.executeQuery();
+
+      while (rs.next()) {
+        Track tmp = new Track(tr.get(rs.getString(1)).getName(), tr.get(rs.getString(1)).getGender(), tr.get(rs.getString(1)).getDuration(), tr.get(rs.getString(1)).getPopularity());
+        tmp.setId(rs.getString(1));
+        tmp.setIdUser(tr.get(rs.getString(1)).getIdUser());
+        trackList.add(tmp);
+      }
+
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+    return trackList;
   }
 
 }

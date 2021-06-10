@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import config.JDBCUtil;
 import dao.dao_interfaces.IUserDao;
 import model.User;
@@ -21,6 +23,10 @@ public class UserDAO implements IUserDao {
 
   private String UPDATE_ONE_USER_SQL = "UPDATE usuario "
       + "Set nombre_usuario = ?,playlists_creadas=?,nacionalidad=? where id_usuario = ?;";
+
+  private String SELECT_USER_SQL = "SELECT * FROM usuario";
+
+  private UserDAO us = new UserDAO();
 
   @Override
   public User add(User user) {
@@ -107,6 +113,32 @@ public class UserDAO implements IUserDao {
       System.out.println(e);
     }
     return userUpdated;
+  }
+
+  @Override
+  public List<User> getlist() {
+    
+    List<User> userList = new ArrayList<User>();
+
+    try (
+        Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
+            JDBCUtil.getPassword());
+        PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_SQL);) {
+
+      ResultSet rs = preparedStatement.executeQuery();
+
+      while (rs.next()) {
+        User tmp = new User(us.get(rs.getString(1)).getUserName(), us.get(rs.getString(1)).getNationality());
+        tmp.setId(rs.getString(1));
+        tmp.setId(us.get(rs.getString(1)).getId());
+        userList.add(tmp);
+      }
+
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+    return userList;
+
   }
 
 }
