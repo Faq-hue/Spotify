@@ -26,7 +26,6 @@ public class UserDAO implements IUserDao {
 
   private String SELECT_USER_SQL = "SELECT * FROM usuario";
 
-  private UserDAO us = new UserDAO();
 
   @Override
   public User add(User user) {
@@ -128,9 +127,9 @@ public class UserDAO implements IUserDao {
       ResultSet rs = preparedStatement.executeQuery();
 
       while (rs.next()) {
-        User tmp = new User(us.get(rs.getString(1)).getUserName(), us.get(rs.getString(1)).getNationality());
+        User tmp = new UserDAO().get(rs.getString(1));
         tmp.setId(rs.getString(1));
-        tmp.setId(us.get(rs.getString(1)).getId());
+        //TODO agregar Playlist a Dao
         userList.add(tmp);
       }
 

@@ -15,7 +15,7 @@ public class SongDAO implements ISongDAO {
 
   private TrackDAO tr = new TrackDAO();
 
-  private String INSERT_SONG_SQL = "INSERT INTO cancion (id_pista)" + "VALUES(?)";
+  private String INSERT_SONG_SQL = "INSERT INTO cancion (id_pista,letra)" + "VALUES(?,?)";
 
   private String SELECT_ONE_SONG_SQL = "SELECT * FROM cancion " + "WHERE id_pista=?;";
 
@@ -51,6 +51,7 @@ public class SongDAO implements ISongDAO {
 
   @Override
   public Song get(String id) {
+    Song s = new Song();
     try (
         Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
             JDBCUtil.getPassword());
@@ -60,7 +61,13 @@ public class SongDAO implements ISongDAO {
   
       ResultSet rs = preparedStatement.executeQuery();
       while (rs.next()) {
-        return new Song(rs.getFloat(1), rs.getString(2), rs.getString(3));
+        s.setName(tr.get(rs.getString(1)).getName());
+        s.setGender(tr.get(rs.getString(1)).getGender());
+        s.setId(rs.getString(1));
+        s.setDuration(tr.get(rs.getString(1)).getDuration());
+        s.setPopularity(tr.get(rs.getString(1)).getPopularity());
+        s.setIdUser(tr.get(rs.getString(1)).getIdUser());
+        s.setLetter(rs.getString(2));
       }
 
       rs.close();
@@ -69,7 +76,7 @@ public class SongDAO implements ISongDAO {
       System.out.println(e);
     }
 
-    return null;
+    return s;
 
   }
 
@@ -129,6 +136,7 @@ public class SongDAO implements ISongDAO {
         tmp.setIdUser(tr.get(rs.getString(1)).getIdUser());
         songsList.add(tmp);
       }
+      rs.close();
 
     } catch (Exception e) {
       System.out.println(e);

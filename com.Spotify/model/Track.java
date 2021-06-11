@@ -26,6 +26,8 @@ public class Track {
     this.idUser = idUser;
   }
 
+  public Track(){}
+
   public Track(String name, String gender, float duration, int popularity) {
     setDuration(duration);
     setGender(gender);

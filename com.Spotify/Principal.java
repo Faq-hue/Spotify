@@ -1,26 +1,24 @@
+import javax.sound.midi.Track;
+
 import dao.ConsumerDAO;
+import dao.CreatorDAO;
+import dao.SongDAO;
+import dao.TrackDAO;
 import model.Consumer;
+import model.Creator;
+import model.Song;
 import model.User;
+import service.PlaySong;
 
 public class Principal {
 
-    public static void main(String[] args) {
-        
-        Consumer c = new Consumer("angie", "bolivia");
-
-        c.setFollowers(3);
-        c.setFollowed(77);
-        
-        ConsumerDAO cDAO = new ConsumerDAO();
-
-        Consumer resultado = cDAO.add(c);
-        
-        if(resultado == null){
-            System.out.println("Error");
-        }
-
-        //User u = new User("kevin", "peru");
-
-    }
+  public static void main(String[] args) {
     
+    
+    TrackDAO tr = new TrackDAO();
+
+    System.out.println(tr.get("b19da0fc-0fd5-4830-8aef-b841ef4e99bb"));
+
+  }
+
 }
