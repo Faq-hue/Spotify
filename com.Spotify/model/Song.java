@@ -1,15 +1,15 @@
 package model;
 
 public class Song extends Track {
-
+  
   String letter = new String();
+  
+  public Song (){}
 
-  public Song(){}
-  
-  public Song(float duration, String name, String gender) {
+  public Song(String name, String gender,float duration) {
     super(name, gender, duration, 0);
-  }
-  
+  } 
+
   public String getLetter() {
     return this.letter;
   }
@@ -17,7 +17,8 @@ public class Song extends Track {
   public void setLetter(String letter) {
     this.letter = letter;
   }
-
+  
+  
 
   @Override
   public String toString() {

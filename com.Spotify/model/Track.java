@@ -10,6 +10,15 @@ public class Track {
   private String gender;
   private String idUser;
 
+  public Track (){}
+
+  public Track(String name, String gender, float duration, int popularity) {
+    setDuration(duration);
+    setGender(gender);
+    setName(name);
+    setPopularity(popularity);
+  }
+
   public String getId() {
     return this.id;
   }
@@ -24,15 +33,6 @@ public class Track {
 
   public void setIdUser(String idUser) {
     this.idUser = idUser;
-  }
-
-  public Track(){}
-
-  public Track(String name, String gender, float duration, int popularity) {
-    setDuration(duration);
-    setGender(gender);
-    setName(name);
-    setPopularity(popularity);
   }
 
   public String getGender() {
