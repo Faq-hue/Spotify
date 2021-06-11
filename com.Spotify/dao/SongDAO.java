@@ -15,7 +15,7 @@ public class SongDAO implements ISongDAO {
 
   private TrackDAO tr = new TrackDAO();
 
-  private String INSERT_SONG_SQL = "INSERT INTO cancion (id_pista,letra)" + "VALUES(?,?)";
+  private String INSERT_SONG_SQL = "INSERT INTO cancion (id_pista, letra)" + "VALUES(?,?)";
 
   private String SELECT_ONE_SONG_SQL = "SELECT * FROM cancion " + "WHERE id_pista=?;";
 
@@ -31,8 +31,7 @@ public class SongDAO implements ISongDAO {
     try (
         Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
             JDBCUtil.getPassword());
-        PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SONG_SQL,
-            java.sql.Statement.RETURN_GENERATED_KEYS);) {
+        PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SONG_SQL)) {
 
       preparedStatement.setString(1, tr.add(song).getId());
       preparedStatement.setString(2, song.getLetter());
@@ -51,7 +50,9 @@ public class SongDAO implements ISongDAO {
 
   @Override
   public Song get(String id) {
+
     Song s = new Song();
+
     try (
         Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
             JDBCUtil.getPassword());
@@ -60,6 +61,7 @@ public class SongDAO implements ISongDAO {
       preparedStatement.setString(1, id);
   
       ResultSet rs = preparedStatement.executeQuery();
+      
       while (rs.next()) {
         s.setName(tr.get(rs.getString(1)).getName());
         s.setGender(tr.get(rs.getString(1)).getGender());
@@ -131,12 +133,11 @@ public class SongDAO implements ISongDAO {
       ResultSet rs = preparedStatement.executeQuery();
 
       while (rs.next()) {
-        Song tmp = new Song(tr.get(rs.getString(1)).getDuration(), tr.get(rs.getString(1)).getName(), tr.get(rs.getString(1)).getGender());
+        Song tmp = new Song(tr.get(rs.getString(1)).getGender(), tr.get(rs.getString(1)).getName(), tr.get(rs.getString(1)).getDuration());
         tmp.setId(rs.getString(1));
         tmp.setIdUser(tr.get(rs.getString(1)).getIdUser());
         songsList.add(tmp);
       }
-      rs.close();
 
     } catch (Exception e) {
       System.out.println(e);
