@@ -1,4 +1,4 @@
-package dao;
+package dao.trackdao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import config.JDBCUtil;
-import dao.dao_interfaces.IPodcastDAO;
+import dao.dao_interfaces.track_interfaces.IPodcastDAO;
 import model.Podcast;
 
 public class PodcastDAO implements IPodcastDAO {
@@ -38,7 +38,6 @@ public class PodcastDAO implements IPodcastDAO {
       preparedStatement.setString(1, tr.add(podcast).getId());
       preparedStatement.setString(2, podcast.getDescription());
 
-      System.out.println(preparedStatement);
 
       preparedStatement.executeUpdate();
 
@@ -51,7 +50,8 @@ public class PodcastDAO implements IPodcastDAO {
 
   @Override
   public Podcast get(String id) {
-
+    Podcast p = new Podcast();
+    //String SELECT_SONGS = "SELECT * FROM tiene"+" ";
     try (
         Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
             JDBCUtil.getPassword());
@@ -60,8 +60,15 @@ public class PodcastDAO implements IPodcastDAO {
       preparedStatement.setString(1, id);
 
       ResultSet rs = preparedStatement.executeQuery();
-      while (rs.next()) {
-        return new Podcast(rs.getString(1), rs.getString(2), rs.getFloat(3));
+      if (rs.next()) {
+        p.setId(rs.getString(1));
+        p.setName(tr.get(rs.getString(1)).getName());
+        p.setDescription(rs.getString(2));
+        p.setGender(tr.get(rs.getString(1)).getGender());
+        p.setDuration(tr.get(rs.getString(1)).getDuration());
+        p.setIdUser(tr.get(rs.getString(1)).getIdUser());
+        p.setPopularity(tr.get(rs.getString(1)).getPopularity());
+        
       }
 
       rs.close();
@@ -70,7 +77,7 @@ public class PodcastDAO implements IPodcastDAO {
       System.out.println(e);
     }
 
-    return null;
+    return p;
   }
 
   @Override

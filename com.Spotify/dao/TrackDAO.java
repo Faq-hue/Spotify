@@ -1,4 +1,4 @@
-package dao;
+package dao.trackdao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,12 +8,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import config.JDBCUtil;
-import dao.dao_interfaces.ITrackDAO;
+import dao.dao_interfaces.track_interfaces.ITrackDAO;
 import model.Track;
 
 public class TrackDAO implements ITrackDAO {
 
-  private String INSERT_TRACK_SQL = "INSERT INTO pista (id_pista, nombre, duracion, popularidad, genero, id_usuario)" + "VALUES(?,?,?,?,?,?)";
+  private String INSERT_TRACK_SQL = "INSERT INTO pista (id_pista, nombre, duracion, popularidad, genero, id_usuario)"
+      + "VALUES(?,?,?,?,?,?)";
 
   private String SELECT_ONE_TRACK_SQL = "SELECT * FROM pista " + "WHERE id_pista=?;";
 
@@ -30,7 +31,7 @@ public class TrackDAO implements ITrackDAO {
         Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
             JDBCUtil.getPassword());
         PreparedStatement preparedStatement = connection.prepareStatement(INSERT_TRACK_SQL)) {
-      
+
       preparedStatement.setString(1, track.getId());
       preparedStatement.setString(2, track.getName());
       preparedStatement.setFloat(3, track.getDuration());
@@ -51,31 +52,31 @@ public class TrackDAO implements ITrackDAO {
 
   @Override
   public Track get(String id) {
-    Track t =  new Track();
-      try (
-          Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
-              JDBCUtil.getPassword());
-          PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ONE_TRACK_SQL)) {
-  
-        preparedStatement.setString(1, id);
-  
-        ResultSet rs = preparedStatement.executeQuery();
-        while (rs.next()) {
-          t.setId(rs.getString(1));
-          t.setName(rs.getString(2));
-          t.setDuration(rs.getFloat(3));
-          t.setPopularity(rs.getInt(4));
-          t.setGender(rs.getString(5));
-          t.setIdUser(rs.getString(6));
-        }
-        rs.close();
-  
-      } catch (SQLException e) {
-        System.out.println(e);
+    Track t = new Track();
+    try (
+        Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
+            JDBCUtil.getPassword());
+        PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ONE_TRACK_SQL)) {
+
+      preparedStatement.setString(1, id);
+
+      ResultSet rs = preparedStatement.executeQuery();
+      while (rs.next()) {
+        t.setId(rs.getString(1));
+        t.setName(rs.getString(2));
+        t.setDuration(rs.getFloat(3));
+        t.setPopularity(rs.getInt(4));
+        t.setGender(rs.getString(5));
+        t.setIdUser(rs.getString(6));
       }
-  
-      return t;
+      rs.close();
+
+    } catch (SQLException e) {
+      System.out.println(e);
     }
+
+    return t;
+  }
 
   @Override
   public Track delete(String id) {
@@ -86,8 +87,8 @@ public class TrackDAO implements ITrackDAO {
         Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
             JDBCUtil.getPassword());
         PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ONE_TRACK_SQL)) {
-      
-        preparedStatement.setString(1, id);
+
+      preparedStatement.setString(1, id);
 
       System.out.println(preparedStatement);
 
@@ -102,13 +103,13 @@ public class TrackDAO implements ITrackDAO {
 
   @Override
   public Track update(String id, Track trackUpdated) {
-    
+
     try (
         Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
             JDBCUtil.getPassword());
         PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ONE_TRACK_SQL);) {
 
-      preparedStatement.setString(1,trackUpdated.getName());
+      preparedStatement.setString(1, trackUpdated.getName());
       preparedStatement.setFloat(2, trackUpdated.getDuration());
       preparedStatement.setInt(3, trackUpdated.getPopularity());
       preparedStatement.setString(4, id);
@@ -123,7 +124,7 @@ public class TrackDAO implements ITrackDAO {
 
   @Override
   public List<Track> getlist() {
-    
+
     List<Track> trackList = new ArrayList<Track>();
 
     try (

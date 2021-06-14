@@ -1,4 +1,4 @@
-package dao;
+package dao.userdao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import config.JDBCUtil;
-import dao.dao_interfaces.IConsumerDAO;
+import dao.dao_interfaces.user_interfaces.IConsumerDAO;
 import model.Consumer;
 
 public class ConsumerDAO implements IConsumerDAO {

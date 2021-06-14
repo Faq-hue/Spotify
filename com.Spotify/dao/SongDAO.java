@@ -1,4 +1,4 @@
-package dao;
+package dao.trackdao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import config.JDBCUtil;
-import dao.dao_interfaces.ISongDAO;
+import dao.dao_interfaces.track_interfaces.ISongDAO;
 import model.Song;
 
 public class SongDAO implements ISongDAO {
@@ -21,7 +21,7 @@ public class SongDAO implements ISongDAO {
 
   private String DELETE_ONE_SONG_SQL = "DELETE FROM cancion " + "WHERE id_pista=?;";
 
-  private String UPDATE_ONE_SONG_SQL = "UPDATE cancion " + "SET letra WHERE id_pista = ?;";
+  private String UPDATE_ONE_SONG_SQL = "UPDATE cancion " + "SET letra=? WHERE id_pista = ?;";
 
   private String SELECT_SONG_SQL = "SELECT * FROM cancion";
 
@@ -59,9 +59,9 @@ public class SongDAO implements ISongDAO {
         PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ONE_SONG_SQL);) {
 
       preparedStatement.setString(1, id);
-  
+
       ResultSet rs = preparedStatement.executeQuery();
-      
+
       while (rs.next()) {
         s.setName(tr.get(rs.getString(1)).getName());
         s.setGender(tr.get(rs.getString(1)).getGender());
@@ -93,7 +93,7 @@ public class SongDAO implements ISongDAO {
         PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ONE_SONG_SQL);) {
 
       preparedStatement.setString(1, id);
-      
+
       preparedStatement.executeUpdate();
 
     } catch (Exception e) {
@@ -111,8 +111,11 @@ public class SongDAO implements ISongDAO {
         PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ONE_SONG_SQL);) {
 
       preparedStatement.setString(1, songUpdated.getLetter());
+      preparedStatement.setString(2, songUpdated.getId());
 
       preparedStatement.executeUpdate();
+
+      tr.update(id, songUpdated);
 
     } catch (Exception e) {
       System.out.println(e);
@@ -124,7 +127,6 @@ public class SongDAO implements ISongDAO {
   @Override
   public List<Song> getlist() {
     List<Song> songsList = new ArrayList<Song>();
-
     try (
         Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
             JDBCUtil.getPassword());
@@ -133,7 +135,10 @@ public class SongDAO implements ISongDAO {
       ResultSet rs = preparedStatement.executeQuery();
 
       while (rs.next()) {
-        Song tmp = new Song(tr.get(rs.getString(1)).getGender(), tr.get(rs.getString(1)).getName(), tr.get(rs.getString(1)).getDuration());
+        Song tmp = new Song();
+        tmp.setName(tr.get(rs.getString(1)).getName());
+        tmp.setGender(tr.get(rs.getString(1)).getGender());
+        tmp.setDuration(tr.get(rs.getString(1)).getDuration());
         tmp.setId(rs.getString(1));
         tmp.setIdUser(tr.get(rs.getString(1)).getIdUser());
         songsList.add(tmp);
