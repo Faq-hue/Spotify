@@ -13,8 +13,8 @@ import model.Track;
 
 public class TrackDAO implements ITrackDAO {
 
-  private String INSERT_TRACK_SQL = "INSERT INTO pista (id_pista, nombre, duracion, popularidad, genero, id_usuario)"
-      + "VALUES(?,?,?,?,?,?)";
+  private String INSERT_TRACK_SQL = "INSERT INTO pista (id_pista, nombre, duracion, popularidad, genero, id_usuario, tipo)"
+      + "VALUES(?,?,?,?,?,?,?)";
 
   private String SELECT_ONE_TRACK_SQL = "SELECT * FROM pista " + "WHERE id_pista=?;";
 
@@ -38,6 +38,7 @@ public class TrackDAO implements ITrackDAO {
       preparedStatement.setInt(4, track.getPopularity());
       preparedStatement.setString(5, track.getGender());
       preparedStatement.setString(6, track.getIdUser());
+      preparedStatement.setByte(1, track.getTipe());
 
       System.out.println(preparedStatement);
 
@@ -68,6 +69,7 @@ public class TrackDAO implements ITrackDAO {
         t.setPopularity(rs.getInt(4));
         t.setGender(rs.getString(5));
         t.setIdUser(rs.getString(6));
+        t.setTipe(rs.getByte(7));
       }
       rs.close();
 
