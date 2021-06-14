@@ -8,6 +8,9 @@ public class Podcast extends Track {
     setDescription(description);
   }
 
+  public Podcast() {
+  }
+
   public String getDescription() {
     return description;
   }
