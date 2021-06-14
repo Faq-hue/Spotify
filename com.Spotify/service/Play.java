@@ -1,18 +1,16 @@
 package service;
 
-import dao.SongDAO;
+import dao.trackdao.SongDAO;
 import model.Song;
 
 public class Play {
-    
-    public static void playSong( String id ){
 
-        SongDAO sDAO = new SongDAO();
+  public static void playSong(String id) {
 
-        Song sPlay = sDAO.get(id);        
+    Song sPlay = new SongDAO().get(id);
 
-        System.out.println("Playing:..." + "\n" + sPlay.getLetter());
+    System.out.println("Playing:..." + "\n" + sPlay.getLetter());
 
-    }
+  }
 
 }

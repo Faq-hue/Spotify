@@ -3,24 +3,20 @@ package service;
 import java.util.List;
 
 import dao.PlaylistDAO;
-import dao.SongDAO;
+import dao.trackdao.SongDAO;
 import model.Song;
 import model.Playlist;
 
 public class Recommendations {
 
-    public Playlist recommendationPlaylistSong(){
+  public Playlist recommendationPlaylistSong() {
 
-        PlaylistDAO plDAO = new PlaylistDAO();
-        SongDAO sDAO = new SongDAO();
+    //PlaylistDAO plDAO = new PlaylistDAO();
+    //SongDAO sDAO = new SongDAO();
 
-        List<Song> listSongs = sDAO.getlist();
-        
-        
+    //List<Song> listSongs = sDAO.getlist();
 
-        return new Playlist();
-    }
+    return new Playlist();
+  }
 
-
-    
 }
