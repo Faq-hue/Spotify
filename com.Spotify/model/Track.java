@@ -9,6 +9,20 @@ public class Track implements Comparable<Track> {
   private int popularity;
   private String gender;
   private String idUser;
+  private boolean tipe;
+  //0 cancion 1 podcast
+
+  public boolean isTipe() {
+    return this.tipe;
+  }
+
+  public boolean getTipe() {
+    return this.tipe;
+  }
+
+  public void setTipe(boolean tipe) {
+    this.tipe = tipe;
+  }
 
   public Track (){}
 
