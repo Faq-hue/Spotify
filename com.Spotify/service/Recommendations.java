@@ -1,14 +1,15 @@
 package service;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
 
 import dao.PlaylistDAO;
 import dao.SongDAO;
+import dao.TrackDAO;
 import model.Song;
 import model.Track;
 import model.Playlist;
@@ -17,21 +18,102 @@ public class Recommendations  {
 
     public Playlist recommendationByCountry(){
 
-        PlaylistDAO plDAO = new PlaylistDAO();
-        SongDAO sDAO = new SongDAO();
+        List<Track> listTracks = new TrackDAO().getlist();
 
-        List<Song> listSongs = sDAO.getlist();        
+        List<Song> listSongs = new SongDAO().getlist();
+
+        Track[] arr = new Track[listSongs.size()];
+
+        for (int i = 0; i < listTracks.size(); i++) {
+
+            try {
+                if (listSongs.get(i) != null) {
+
+                    arr[i] = listTracks.get(i);
+
+                }
+            } catch (Exception e) {
+
+            }
+
+        }
+
+        Arrays.sort(arr);
+
+        for (int i = arr.length; i == arr.length || i > 0; i--) {
+
+            System.out.println(arr[i - 1]);
+
+        }    
 
         return new Playlist();
     }
+    
 
     public Playlist recomendationByGender(){
+        List<Track> listTracks = new TrackDAO().getlist();
 
+        List<Song> listSongs = new SongDAO().getlist();
+
+        Track[] arr = new Track[listSongs.size()];
+
+        for (int i = 0; i < listTracks.size(); i++) {
+
+            try {
+                if (listSongs.get(i) != null) {
+
+                    arr[i] = listTracks.get(i);
+
+                }
+            } catch (Exception e) {
+
+            }
+
+        }
+
+        Arrays.sort(arr);
+
+        for (int i = arr.length; i == arr.length || i > 0; i--) {
+
+            System.out.println(arr[i - 1]);
+
+        }
+        
         return new Playlist();
     }
+
 
     public Playlist recomendationByArtist(){
 
+      
+        List<Track> listTracks = new TrackDAO().getlist();
+
+        List<Song> listSongs = new SongDAO().getlist();
+
+        Track[] arr = new Track[listSongs.size()];
+
+        for (int i = 0; i < listTracks.size(); i++) {
+
+            try {
+                if (listSongs.get(i) != null) {
+
+                    arr[i] = listTracks.get(i);
+
+                }
+            } catch (Exception e) {
+
+            }
+
+        }
+
+        Arrays.sort(arr);
+
+        for (int i = arr.length; i == arr.length || i > 0; i--) {
+
+            System.out.println(arr[i - 1]);
+
+        }
+        
         return new Playlist();
     }
 
