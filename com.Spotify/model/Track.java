@@ -2,7 +2,7 @@ package model;
 
 import java.util.UUID;
 
-public class Track {
+public class Track implements Comparable<Track> {
   private String id = UUID.randomUUID().toString();
   private String name;
   private float duration;
@@ -70,6 +70,20 @@ public class Track {
   @Override
   public String toString() {
     return "name: " + getName() + "\n gender: " + getGender() + "\n duration of song: " + getDuration();
+  }
+
+  @Override
+  public int compareTo(Track t) {
+
+    if (this.popularity < t.popularity) {
+      return -1;
+    }
+
+    if (this.popularity > t.popularity) {
+      return 1;
+    }
+
+    return 0;
   }
 
   @Override
