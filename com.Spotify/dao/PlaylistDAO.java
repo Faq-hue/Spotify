@@ -5,12 +5,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import config.JDBCUtil;
 import dao.dao_interfaces.track_interfaces.IPlaylist;
-import dao.trackdao.SongDAO;
-import dao.trackdao.TieneDAO;
+import dao.SongDAO;
+import dao.TieneDAO;
 import model.Playlist;
 
 public class PlaylistDAO implements IPlaylist {
@@ -18,6 +19,9 @@ public class PlaylistDAO implements IPlaylist {
   String INSER_PLAYLIST_SQL = "INSERT INTO playlist (id_playlist,nombre,cantidad_pistas,fecha_creacion,id_usuario)"
       + " VALUES (?,?,?,?,?);";
   String SELECT_ONE_PLAYLIST = "SELECT * FROM playlist" + " WHERE id_playlist=?;";
+  String DELETE_PLAYLIST_SQL = "DELETE FROM playlist" + "WHERE id_playlist=?;";
+  String UPDATE_PLAYLIST_SQL = "UPDATE playlist" + "Set nombre=?,cantidad_pistas=?,fecha_creacion=? WHERE id_usuario=?";
+  String SELECT_PLAYLIST_SQL = "SELECT * FROM playlist;";
 
   @Override
   public Playlist add(Playlist playlist) {
@@ -78,21 +82,72 @@ public class PlaylistDAO implements IPlaylist {
   }
 
   @Override
-  public Playlist delete(String arg) {
-    // TODO Auto-generated method stub
-    return null;
+  public Playlist delete(String id) {
+    Playlist p = get(id);
+
+    try (
+        Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
+            JDBCUtil.getPassword());
+        PreparedStatement preparedStatement = connection.prepareStatement(DELETE_PLAYLIST_SQL)){
+
+      preparedStatement.setString(1, id);
+
+      System.out.println(preparedStatement);
+
+      preparedStatement.executeUpdate();
+
+    } catch (SQLException e) {
+      System.out.println(e);
+    }
+
+    return p;
   }
 
   @Override
-  public Playlist update(String arg1, Playlist arg2) {
-    // TODO Auto-generated method stub
-    return null;
+  public Playlist update(String id, Playlist plUpdate) {
+    try (
+        Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
+            JDBCUtil.getPassword());
+        PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PLAYLIST_SQL);) {
+
+      preparedStatement.setString(1, plUpdate.getNamePlaylist());
+      preparedStatement.setInt(2, plUpdate.getPlaylistContent().size());
+      preparedStatement.setString(3,plUpdate.getDate());
+      preparedStatement.setString(4, id);
+
+      preparedStatement.executeUpdate();
+
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+    return plUpdate;
   }
 
   @Override
   public List<Playlist> getlist() {
-    // TODO Auto-generated method stub
-    return null;
+
+    List<Playlist> lPlaylist = new ArrayList<>();
+    
+    try (
+        Connection connection = DriverManager.getConnection(JDBCUtil.getURL(), JDBCUtil.getUser(),
+            JDBCUtil.getPassword());
+        PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PLAYLIST_SQL);) {
+
+      ResultSet rs = preparedStatement.executeQuery();
+
+      while (rs.next()) {
+        Playlist tmp = new PlaylistDAO().get(rs.getString(1));
+        tmp.setId(rs.getString(1));
+        
+        lPlaylist.add(tmp);
+      }
+
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+
+
+    return lPlaylist;
   }
 
 }
