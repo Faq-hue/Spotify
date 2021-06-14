@@ -15,7 +15,7 @@ public class Pause {
 
         User uPause = new UserDAO().get(id);
 
-            System.out.println("User is AFK...");
+            System.out.println("User is not listening...");
 
 
     }
