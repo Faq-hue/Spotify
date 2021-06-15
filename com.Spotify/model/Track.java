@@ -83,7 +83,7 @@ public class Track implements Comparable<Track> {
 
   @Override
   public String toString() {
-    return "name: " + getName() + "\n gender: " + getGender() + "\n duration of song: " + getDuration();
+    return "\nName: " + getName() + "\nGender: " + getGender() + "\nDuration of song: " + getDuration();
   }
 
   @Override
