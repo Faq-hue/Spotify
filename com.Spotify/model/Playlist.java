@@ -62,5 +62,11 @@ public class Playlist {
     this.namePlaylist = namePlaylist;
   }
 
+  @Override
+  public String toString() {
+    return "Name: " + getNamePlaylist() + "\nSongs:\n" + this.playlistContent ;
+  }
+  
+
 
 }
