@@ -10,6 +10,8 @@ public class User {
   private String nationality;
   private List<Playlist> playlistCreated = new ArrayList<Playlist>();
 
+  public User(){}
+
   protected User(String name, String nationality, List<Playlist> playlistCreated) {
     this(name, nationality);
     setPlaylistCreated(playlistCreated);
