@@ -1,45 +1,69 @@
 package service;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
-import com.mysql.cj.x.protobuf.MysqlxExpr.Object;
-import dao.PlaylistDAO;
-import dao.SongDAO;
 import dao.TrackDAO;
 import dao.UserDAO;
-import model.Song;
 import model.Track;
 import model.User;
 import model.Playlist;
 
 public class Recommendations {
 
-    public Playlist recommendationByCountry() {
+    public static Playlist recommendationByGender() {
 
-        return new Playlist();
+        Track t = new TrackDAO().get(recomendationByPopularity().getPlaylistContent().get(0).getId());
+
+        List <Track> trackList = new TrackDAO().getlist();
+
+        List <Track> definitiveList = new ArrayList<Track>();
+
+        for (int i = 0; i < trackList.size(); i++) {
+            
+            if( trackList.get(i).getGender().equals(t.getGender()) ){
+
+                definitiveList.add(trackList.get(i));
+
+            }
+
+        }
+        
+        Playlist plDef = new Playlist();
+        plDef.setNamePlaylist("Best gender " + t.getGender());
+        plDef.setPlaylistContent(definitiveList);
+
+        return plDef;
     }
 
-    public static Playlist recomendationByGender() {
+    public static Playlist recomendationByNationality() {
 
-        List<Track> trackList = new TrackDAO().getlist();
+        User u = new UserDAO().get(recomendationByPopularity().getPlaylistContent().get(0).getIdUser());
 
-        List<Track> genderList = new ArrayList<Track>();
+        List <Track> trackList = new TrackDAO().getlist();
 
-        return new Playlist();
+        List <Track> definitiveList = new ArrayList<Track>();
+
+        for (int i = 0; i < trackList.size(); i++) {
+            
+            if( u.getNationality().equals( new UserDAO().get(trackList.get(i).getIdUser()).getNationality()) ){
+
+                definitiveList.add(trackList.get(i));
+
+            }
+
+        }
+
+        Playlist plDef = new Playlist();
+        plDef.setNamePlaylist("Best of this country " + u.getNationality());
+        plDef.setPlaylistContent(definitiveList);
+
+        return plDef;
     }
 
-    public static Playlist recomendationByArtist() {
+    public static Playlist recomendationByArtist() {    
 
-        Playlist pl = recomendationByPopularity();
-
-        Track t = pl.getPlaylistContent().get(0);
-
-        User u = new UserDAO().get(t.getIdUser());
+        User u = new UserDAO().get(recomendationByPopularity().getPlaylistContent().get(0).getIdUser());
 
         List <Track> tracklist = new TrackDAO().getlist();
 
@@ -48,7 +72,7 @@ public class Recommendations {
 
         for (int i = 0; i < tracklist.size(); i++) {
 
-            if( tracklist.get(0).getIdUser().equals(t.getIdUser()) ){
+            if( tracklist.get(0).getIdUser().equals(recomendationByPopularity().getPlaylistContent().get(0).getIdUser()) ){
 
                 definitiveList.add(tracklist.get(i));
                 
