@@ -1,24 +1,17 @@
-import javax.sound.midi.Track;
-
-import dao.ConsumerDAO;
-import dao.CreatorDAO;
-import dao.SongDAO;
-import dao.TrackDAO;
-import model.Consumer;
-import model.Creator;
-import model.Song;
-import model.User;
-import service.PlaySong;
+import service.RecommendationsSong;
 
 public class Principal {
 
   public static void main(String[] args) {
-    
-    
-    TrackDAO tr = new TrackDAO();
-
-    System.out.println(tr.get("b19da0fc-0fd5-4830-8aef-b841ef4e99bb"));
-
+    System.out.println("--------------------------------------------------------------------");
+    System.out.println(RecommendationsSong.recommendationByPopularity());
+    System.out.println("--------------------------------------------------------------------");
+    System.out.println(RecommendationsSong.recommendationByNationality());
+    System.out.println("--------------------------------------------------------------------");
+    System.out.println(RecommendationsSong.recommendationByArtist());
+    System.out.println("--------------------------------------------------------------------");
+    System.out.println(RecommendationsSong.recommendationByGender());
+    System.out.println("--------------------------------------------------------------------");
   }
 
 }

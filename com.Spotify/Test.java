@@ -1,5 +1,4 @@
 import java.util.Random;
-
 import dao.ConsumerDAO;
 import dao.CreatorDAO;
 import dao.PodcastDAO;
@@ -11,7 +10,7 @@ import model.Song;
 
 public class Test {
 
-    public static void main(String[] args) {
+    public static void populate(String[] args) {
         
         Random r = new Random();
         
@@ -39,11 +38,17 @@ public class Test {
 
         for (int i = 1; i <= 10; i++) {
             
-            int x = r.nextInt(15)+11;
+            int x = r.nextInt(5)+11;
 
             Song song = ModelGenerator.songGenerator();
             song.setId(i+"");
             song.setIdUser((x)+"");
+
+            Creator c = cr.get(x+"");
+
+            c.setCreatedTracks((c.getCreatedTracks()+1));
+
+            cr.update(x+"", c);
 
             s.add(song);
         }
@@ -52,14 +57,19 @@ public class Test {
 
         for (int i = 11; i <= 15; i++) {
 
-            int x = r.nextInt(15)+11;
+            int x = r.nextInt(5)+11;
 
             Podcast podcast = ModelGenerator.podcastGenerator();
             podcast.setId((i)+"");
             podcast.setIdUser((x)+"");
 
+            Creator c = cr.get(x+"");
+
+            c.setCreatedTracks(c.getCreatedTracks()+1);
+
+            cr.update(x+"", c);
+
             p.add(podcast);
         }
-
     }
 }

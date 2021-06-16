@@ -1,10 +1,9 @@
 package service;
 
 import java.util.List;
-
+import dao.TrackDAO;
 import model.Track;
 
-import dao.trackdao.TrackDAO;
 
 public class Search {
 

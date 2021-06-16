@@ -38,7 +38,7 @@ public class TrackDAO implements ITrackDAO {
       preparedStatement.setInt(4, track.getPopularity());
       preparedStatement.setString(5, track.getGender());
       preparedStatement.setString(6, track.getIdUser());
-      preparedStatement.setByte(1, track.getTipe());
+      preparedStatement.setByte(7, track.getTipe());
 
       System.out.println(preparedStatement);
 

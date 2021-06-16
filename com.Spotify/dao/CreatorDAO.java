@@ -22,7 +22,7 @@ public class CreatorDAO implements ICreatorDAO {
 
   private String DELETE_ONE_CREATOR_SQL = "DELETE FROM creador " + "WHERE id_usuario=?;";
 
-  private String UPDATE_ONE_CREATOR_SQL = "UPDATE consumidor " + "SET pistas_creadas=? WHERE id_usuario = ?;";
+  private String UPDATE_ONE_CREATOR_SQL = "UPDATE creador " + "SET pistas_creadas=? WHERE id_usuario = ?;";
 
   private String SELECT_CREATOR_SQL = "SELECT * FROM creador";
 
