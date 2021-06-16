@@ -11,6 +11,8 @@ public class Consumer extends User {
 
   }
 
+  public Consumer(){}
+
   public int getFollowers() {
     return this.followers;
   }

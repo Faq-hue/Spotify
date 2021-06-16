@@ -12,7 +12,7 @@ public class User {
 
   public User(){}
 
-  protected User(String name, String nationality, List<Playlist> playlistCreated) {
+  public User(String name, String nationality, List<Playlist> playlistCreated) {
     this(name, nationality);
     setPlaylistCreated(playlistCreated);
   }
@@ -30,7 +30,7 @@ public class User {
     return nationality;
   }
 
-  protected void setNationality(String nationality) {
+  public void setNationality(String nationality) {
     this.nationality = nationality;
   }
 
@@ -46,7 +46,7 @@ public class User {
     this.id = id;
   }
 
-  protected void setUserName(String userName) {
+  public void setUserName(String userName) {
     this.userName = userName;
   }
 

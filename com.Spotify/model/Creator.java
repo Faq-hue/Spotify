@@ -4,6 +4,8 @@ public class Creator extends User {
 
   private int createdTracks;
 
+  public Creator(){}
+
   public Creator(String name, String nationality) {
 
     super(name, nationality);
