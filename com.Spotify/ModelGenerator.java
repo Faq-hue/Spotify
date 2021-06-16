@@ -8,7 +8,6 @@ import model.Playlist;
 import model.Podcast;
 import model.Song;
 import model.Track;
-import model.User;
 
 public class ModelGenerator {
 

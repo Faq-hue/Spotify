@@ -2,14 +2,10 @@ import dao.ConsumerDAO;
 import dao.CreatorDAO;
 import dao.PodcastDAO;
 import dao.SongDAO;
-import dao.TrackDAO;
-import dao.UserDAO;
 import model.Consumer;
 import model.Creator;
 import model.Podcast;
 import model.Song;
-import model.Track;
-import model.User;
 
 public class Test {
 
