@@ -7,128 +7,128 @@ import dao.TrackDAO;
 import dao.UserDAO;
 import model.Track;
 import model.User;
+import service.interfaces.Irecomendations;
 import model.Playlist;
 
-public class RecommendationsSong {
+public class RecommendationsSong implements Irecomendations{
 
-    public static Playlist recommendationByGender() {
+  public static Playlist recommendationByGender() {
 
-        Track t = new TrackDAO().get(recommendationByPopularity().getPlaylistContent().get(0).getId());
+    Track t = new TrackDAO().get(recommendationByPopularity().getPlaylistContent().get(0).getId());
 
-        List <Track> trackList = new TrackDAO().getlist();
+    List<Track> trackList = new TrackDAO().getlist();
 
-        List <Track> definitiveList = new ArrayList<Track>();
+    List<Track> definitiveList = new ArrayList<Track>();
 
-        for (int i = 0; i < trackList.size(); i++) {
-            
-            if( trackList.get(i).getGender().equals(t.getGender()) ){
+    for (int i = 0; i < trackList.size(); i++) {
 
-                definitiveList.add(trackList.get(i));
+      if (trackList.get(i).getGender().equals(t.getGender())) {
 
-            }
+        definitiveList.add(trackList.get(i));
 
-        }
-        
-        Playlist plDef = new Playlist();
-        plDef.setNamePlaylist("Best gender " + t.getGender());
-        plDef.setPlaylistContent(definitiveList);
+      }
 
-        return plDef;
     }
 
-    public static Playlist recommendationByNationality() {
+    Playlist plDef = new Playlist();
+    plDef.setNamePlaylist("Best gender " + t.getGender());
+    plDef.setPlaylistContent(definitiveList);
 
-        User u = new UserDAO().get(recommendationByPopularity().getPlaylistContent().get(0).getIdUser());
+    return plDef;
+  }
 
-        List <Track> trackList = new TrackDAO().getlist();
+  public static Playlist recommendationByNationality() {
 
-        List <Track> definitiveList = new ArrayList<Track>();
+    User u = new UserDAO().get(recommendationByPopularity().getPlaylistContent().get(0).getIdUser());
 
-        for (int i = 0; i < trackList.size(); i++) {
-            
-            if( u.getNationality().equals( new UserDAO().get(trackList.get(i).getIdUser()).getNationality()) ){
+    List<Track> trackList = new TrackDAO().getlist();
 
-                definitiveList.add(trackList.get(i));
+    List<Track> definitiveList = new ArrayList<Track>();
 
-            }
+    for (int i = 0; i < trackList.size(); i++) {
 
-        }
+      if (u.getNationality().equals(new UserDAO().get(trackList.get(i).getIdUser()).getNationality())) {
 
-        Playlist plDef = new Playlist();
-        plDef.setNamePlaylist("Best of this country " + u.getNationality());
-        plDef.setPlaylistContent(definitiveList);
+        definitiveList.add(trackList.get(i));
 
-        return plDef;
+      }
+
     }
 
-    public static Playlist recommendationByArtist() {           
+    Playlist plDef = new Playlist();
+    plDef.setNamePlaylist("Best of this country " + u.getNationality());
+    plDef.setPlaylistContent(definitiveList);
 
-        List <Track> tracklist = new TrackDAO().getlist();
+    return plDef;
+  }
 
-        List<Track> definitiveList = new ArrayList<Track>();
+  public static Playlist recommendationByArtist() {
 
+    List<Track> tracklist = new TrackDAO().getlist();
 
-        for (int i = 0; i < tracklist.size(); i++) {           
+    List<Track> definitiveList = new ArrayList<Track>();
 
+    for (int i = 0; i < tracklist.size(); i++) {
 
-            if( tracklist.get(i).getIdUser().equals(recommendationByPopularity().getPlaylistContent().get(0).getIdUser())){
+      if (tracklist.get(i).getIdUser().equals(recommendationByPopularity().getPlaylistContent().get(0).getIdUser())) {
 
-                definitiveList.add(tracklist.get(i));
-                
-            }
+        definitiveList.add(tracklist.get(i));
 
-        }
+      }
 
-        Playlist plDef = new Playlist();
-        plDef.setNamePlaylist("Best Artist " + new UserDAO().get(recommendationByPopularity().getPlaylistContent().get(0).getIdUser()).getUserName());
-        plDef.setPlaylistContent(definitiveList);
-
-        return plDef;
     }
 
-    public static Playlist recommendationByPopularity() {
+    Playlist plDef = new Playlist();
+    plDef.setNamePlaylist("Best Artist "
+        + new UserDAO().get(recommendationByPopularity().getPlaylistContent().get(0).getIdUser()).getUserName());
+    plDef.setPlaylistContent(definitiveList);
 
-        List<Track> listTracks = new TrackDAO().getlist();
+    return plDef;
+  }
 
-        Track[] arr = new Track[listTracks.size()];
+  public static Playlist recommendationByPopularity() {
 
-        int x = 0;
+    List<Track> listTracks = new TrackDAO().getlist();
 
-        Track discount = new Track();
-        discount.setPopularity(-1);
-        discount.setName("discount");
+    Track[] arr = new Track[listTracks.size()];
 
-        for (int i = 0; i < listTracks.size(); i++) {
+    int x = 0;
 
-            if (listTracks.get(i).getTipe() == 0) {
+    Track discount = new Track();
+    discount.setPopularity(-1);
+    discount.setName("discount");
 
-                arr[i] = listTracks.get(i);
+    for (int i = 0; i < listTracks.size(); i++) {
 
-            } else {
+      if (listTracks.get(i).getTipe() == 0) {
 
-                arr[i] = discount;
-                x++;
-            }
+        arr[i] = listTracks.get(i);
 
-        }
+      } else {
 
-        Arrays.sort(arr);
+        arr[i] = discount;
+        x++;
+      }
 
-        List<Track> definitiveList = new ArrayList<Track>();
-
-        int k = 0;
-
-        for (int i = arr.length - 1; i >= 0 + x; i--) {
-
-            definitiveList.add(k, arr[i]);
-            k++;
-        }
-
-        Playlist pl = new Playlist();
-        pl.setNamePlaylist("Best of the best");
-        pl.setPlaylistContent(definitiveList);
-
-        return pl;
     }
+
+    Arrays.sort(arr);
+
+    List<Track> definitiveList = new ArrayList<Track>();
+
+    int k = 0;
+
+    for (int i = arr.length - 1; i >= 0 + x; i--) {
+
+      definitiveList.add(k, arr[i]);
+      k++;
+    }
+
+    Playlist pl = new Playlist();
+    pl.setNamePlaylist("Best of the best");
+    pl.setPlaylistContent(definitiveList);
+
+    return pl;
+  }
 
 }

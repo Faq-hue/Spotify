@@ -7,9 +7,10 @@ import dao.TrackDAO;
 import dao.UserDAO;
 import model.Track;
 import model.User;
+import service.interfaces.Irecomendations;
 import model.Playlist;
 
-public class RecommendationsPodcast {
+public class RecommendationsPodcast implements Irecomendations{
 
     public static Playlist recommendationByGender() {
 

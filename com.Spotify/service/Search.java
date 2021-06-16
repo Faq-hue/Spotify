@@ -1,13 +1,14 @@
 package service;
 
 import java.util.List;
-import dao.TrackDAO;
+
 import model.Track;
+import service.interfaces.ISearch;
+import dao.TrackDAO;
 
+public class Search implements ISearch{
 
-public class Search {
-
-  public static void songSearch(String songName) {
+  public static void songSearch(String songName){
 
     List<Track> trackList = new TrackDAO().getlist();
 

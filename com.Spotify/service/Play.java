@@ -2,8 +2,9 @@ package service;
 
 import dao.SongDAO;
 import model.Song;
+import service.interfaces.IPlay;
 
-public class Play {
+public class Play implements IPlay{
 
   public static void playSong(String id) {
 
