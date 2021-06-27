@@ -2,7 +2,7 @@ package model;
 
 public class Song extends Track {
   
-  String letter = new String();
+  String letter;
   
   public Song (){}
 

@@ -21,7 +21,6 @@ public class Play implements IPlay{
 
     sDAO.update(sPlay.getId(), sPlay);
 
-
   }
 
 }

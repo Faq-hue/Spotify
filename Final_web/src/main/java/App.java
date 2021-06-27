@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 import dao.PodcastDAO;
 import dao.SongDAO;
 import dao.TrackDAO;
@@ -7,14 +8,14 @@ import model.Playlist;
 import model.Podcast;
 import model.Song;
 import model.User;
-import service.Play;
-import service.RecommendationsPodcast;
-import service.RecommendationsSong;
-import service.Search;
+import service.*;
 
 public class App {
 
     public static void main(String[] args) {
+
+        new Init();
+
         User u = new User();
         boolean p = true;
         String tmp;
@@ -143,7 +144,7 @@ public class App {
         s.setLetter(sn);
 
         System.out.println("Set duration");
-        Float f = scanner.nextFloat();
+        float f = scanner.nextFloat();
 
         s.setDuration(f);
 

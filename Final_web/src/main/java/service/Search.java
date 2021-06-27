@@ -1,30 +1,27 @@
 package service;
 
 import java.util.List;
+
 import static spark.Spark.*;
+
 import model.Track;
 import service.interfaces.ISearch;
 import dao.TrackDAO;
 
-public class Search implements ISearch{
+public class Search implements ISearch {
 
-  public static void songSearch(String songName){
+    public static void songSearch(String songName) {
 
-    List<Track> trackList = new TrackDAO().getlist();
+        List<Track> trackList = new TrackDAO().getlist();
 
-    for (int i = 0; i < trackList.size(); i++) {
-      if (trackList.get(i).getName().toLowerCase().contains(songName.toLowerCase())) {
+        for (Track track : trackList) {
+            if (track.getName().toLowerCase().contains(songName.toLowerCase())) {
+                System.out.println("(-) " + track.getName());
+            }
+        }
 
-        //System.out.println("(-) "+ trackList.get(i).getName());
-
-
-
-      }
+        get("/search", (req, res) -> trackList);
 
     }
-
-    get("/search", (req, res) -> trackList);
-
-  }
 
 }
