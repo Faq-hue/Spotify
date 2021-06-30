@@ -17,7 +17,7 @@ public class Others {
         get("/getListUser",(req,res)-> new UserDAO().getlist());
     }
     public static void getListTrack(){
-        get("/getListUser",(req,res)-> new TrackDAO().getlist());
+        get("/getListTrack",(req,res)-> new TrackDAO().getlist());
     }
 
 
