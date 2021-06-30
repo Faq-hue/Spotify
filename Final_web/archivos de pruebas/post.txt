@@ -1,0 +1,7 @@
+curl -X POST http://localhost:4567/uploadSong -H "Content-Type:application/json" -d "{\"id\":\"777\",\"duration\":2,\"gender\":\"jazz\",\"name\":\"la-vaca-jazz\",\"letter\":\"ASDASDASD\",\"popularity\": 5,\"idUser\":\"13\"}"
+curl -X POST http://localhost:4567/updateSong -H "Content-Type:application/json" -d "{\"duration\":2,\"gender\":\"jazz\",\"name\":\"la-vaca-rockera\",\"letter\":\"NANANUUUUUUUUUU\",\"popularity\": 5,\"idUser\":\"12\",\"id\":\"777\"}"
+curl -X DELETE http://localhost:4567/deleteUser/"ACA VA UNA ID"
+curl -X DELETE http://localhost:4567/deleteTrack/"ACA VA UNA ID"
+curl http://localhost:4567/search/"alex"
+curl http://localhost:4567/play/12
+curl http://localhost:4567/songRecommendationByGender
